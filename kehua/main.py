@@ -22,9 +22,19 @@ driver = webdriver.Remote('http://localhost:4723/wd/hub',
   options=UiAutomator2Options().load_capabilities(desired_caps))
 
 # 设置缺省等待时间
-driver.implicitly_wait(2)
+driver.implicitly_wait(1)
 
+# 点击“动态”tab
+driver.find_element(By.ID, 'mTab3').click()
 
+# 往下滑动
+driver.swipe(start_x=0, start_y=2500, end_x=0, end_y=1000, duration=800)
+
+# 获取所有动态文本
+eles = driver.find_elements(By.ID, 'tvContent')
+
+for ele in eles:
+    print(ele.text)
 
 input('**** Press to quit..')
 driver.quit()
